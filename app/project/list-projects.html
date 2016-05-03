@@ -8,11 +8,13 @@
             <thead>
             <tr>
                 <th>Name</th>
+                <th>View</th>
             </tr>
             </thead>
             <tbody>
             <tr ng-repeat="project in allProjects">
                 <td>{{project.Name}}</td>
+                <td><a id="view-btn" class="btn btn-primary" href="#/projects/{{project.Id}}">View</a></td>
             </tr>
             </tbody>
         </table>

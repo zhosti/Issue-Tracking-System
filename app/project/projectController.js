@@ -15,14 +15,21 @@ angular.module('issueTrackingSystem.project.projectController',[
         .when('/projects/all',{
             templateUrl: 'project/list-projects.html',
             controller: 'ProjectController'
+        })
+        .when('/projects/:id', {
+            templateUrl: 'project/view-project.html',
+            controller: 'ProjectController',
+            access: {
+                requiresLoggedUser: true
+            }
         });
 }])
 .controller('ProjectController', [
     '$scope',
     '$location',
+    '$routeParams',
     'projectService',
-    'userService',
-    function ProjectController($scope, $location, projectService, userService) {
+    function ProjectController($scope, $location, $routeParams, projectService) {
         $scope.projectsPagination = {
             pageSize: 10,
             currentPage: 1
@@ -57,6 +64,17 @@ angular.module('issueTrackingSystem.project.projectController',[
                     });
         };
 
+        $scope.getProjectById = function(projectId) {
+            projectService.getProjectById(projectId)
+                .then(
+                    function success(data) {
+                        $scope.project = data.data;
+                    }, function error(err) {
+                        console.log(err);
+                    });
+        };
+
         $scope.getAllProjects();
+        $scope.getProjectById($routeParams.id);
     }
 ]);
