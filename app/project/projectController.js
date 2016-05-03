@@ -23,10 +23,11 @@ angular.module('issueTrackingSystem.project.projectController',[
     'projectService',
     'userService',
     function ProjectController($scope, $location, projectService, userService) {
-        $scope.projectsParams = {
-            pageSize: 1000,
-            pageNumber: 1
+        $scope.projectsPagination = {
+            pageSize: 10,
+            currentPage: 1
         };
+
         $scope.allUsers();
 
         $scope.addProject = function(project){
@@ -45,10 +46,12 @@ angular.module('issueTrackingSystem.project.projectController',[
         };
 
         $scope.getAllProjects = function() {
-            projectService.getAllProjects($scope.projectsParams)
+            projectService.getAllProjects($scope.projectsPagination)
                 .then(
                     function success(data) {
                         $scope.allProjects = data.Projects;
+                        $scope.projectsCount  = data.TotalPages * $scope.projectsPagination.pageSize;
+
                     }, function error(err) {
                         console.log(err);
                     });

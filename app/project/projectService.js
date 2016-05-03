@@ -49,7 +49,7 @@ angular.module('issueTrackingSystem.project.projectService',[
         function getAllProjects(projectsParams){
             var deferred = $q.defer();
 
-            var url = BASE_URL + 'projects?filter=&pageSize=' + projectsParams.pageSize + '&pageNumber=' + projectsParams.pageNumber;
+            var url = BASE_URL + 'projects?filter=&pageSize=' + projectsParams.pageSize + '&pageNumber=' + projectsParams.currentPage;
 
             $http.defaults.headers.common.Authorization = 'Bearer ' + sessionStorage.authToken;
             $http.get(url)
