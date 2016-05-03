@@ -11,13 +11,22 @@ angular.module('issueTrackingSystem.project.projectController',[
             access:{
                 requiresAdmin: true
             }
+        })
+        .when('/projects/all',{
+            templateUrl: 'project/list-projects.html',
+            controller: 'ProjectController'
         });
 }])
 .controller('ProjectController', [
     '$scope',
     '$location',
     'projectService',
-    function ProjectController($scope, $location, projectService) {
+    'userService',
+    function ProjectController($scope, $location, projectService, userService) {
+        $scope.projectsParams = {
+            pageSize: 1000,
+            pageNumber: 1
+        };
         $scope.allUsers();
 
         $scope.addProject = function(project){
@@ -34,5 +43,17 @@ angular.module('issueTrackingSystem.project.projectController',[
                     }
                 )
         };
+
+        $scope.getAllProjects = function() {
+            projectService.getAllProjects($scope.projectsParams)
+                .then(
+                    function success(data) {
+                        $scope.allProjects = data.Projects;
+                    }, function error(err) {
+                        console.log(err);
+                    });
+        };
+
+        $scope.getAllProjects();
     }
 ]);

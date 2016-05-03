@@ -46,8 +46,24 @@ angular.module('issueTrackingSystem.project.projectService',[
             return deferred.promise;
         }
 
+        function getAllProjects(projectsParams){
+            var deferred = $q.defer();
+
+            var url = BASE_URL + 'projects?filter=&pageSize=' + projectsParams.pageSize + '&pageNumber=' + projectsParams.pageNumber;
+
+            $http.defaults.headers.common.Authorization = 'Bearer ' + sessionStorage.authToken;
+            $http.get(url)
+                .then(function(response){
+                    deferred.resolve(response.data);
+                }, function(err){
+                    deferred.reject(err);
+                });
+
+            return deferred.promise;
+        }
         return {
             addProject: addProject,
+            getAllProjects: getAllProjects
         }
     }
 ]);
