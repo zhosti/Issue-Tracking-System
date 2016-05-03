@@ -3,8 +3,11 @@
 angular.module('issueTrackingSystem', [
     'ngRoute',
     'issueTrackingSystem.home',
+    'issueTrackingSystem.users.userController',
+    'issueTrackingSystem.users.userService',
     'issueTrackingSystem.user_account.authentication',
-    'issueTrackingSystem.user_account.identity'
+    'issueTrackingSystem.user_account.identity',
+    'issueTrackingSystem.project.projectController'
 ])
     .constant('BASE_URL', 'http://softuni-issue-tracker.azurewebsites.net/')
     .config(['$routeProvider', function($routeProvider) {
@@ -13,7 +16,7 @@ angular.module('issueTrackingSystem', [
     .run(['$rootScope', '$location', 'identity', function($rootScope, $location, identity) {
 
         $rootScope.$on('$locationChangeStart', function(event) {
-            if(!identity.hasLoggedUser()) {
+            if(!identity.isLoggedIn()) {
                 $location.path('/');
             }
         });

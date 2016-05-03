@@ -10,9 +10,10 @@ angular.module('issueTrackingSystem.home',[])
     .controller('HomeController',[
         '$scope',
         '$location',
+        'userService',
         'authentication',
         'identity',
-        function HomeController($scope, $location, authentication, identity){
+        function HomeController($scope, $location, userService, authentication, identity){
             $scope.register = function(user){
                 authentication.registerUser(user)
                     .then(function(regUser){
@@ -39,5 +40,5 @@ angular.module('issueTrackingSystem.home',[])
                         });
 
             };
-            $scope.hasLoggedUser = identity.hasLoggedUser;
+            $scope.isLoggedIn = identity.isLoggedIn;
         }]);

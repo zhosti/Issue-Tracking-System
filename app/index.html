@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="app.css">
     <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
 </head>
-<body>
+<body ng-controller="UserController">
     <div ng-controller="HomeController" class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -27,17 +27,17 @@
                 </button>
             </div>
             <div class="navbar-collapse collapse" id="navbar-main">
-                <ul ng-if="hasLoggedUser()" class="nav navbar-nav">
+                <ul ng-if="isLoggedIn()" class="nav navbar-nav">
                     <li><a href="#/dashboard">Dashboard</a></li>
-                    <li><a href="#/projects/all">Projects</a></li>
-                    <li ng-if="isAdmin()"><a href="#/users/all">All users</a></li>
+                    <li><a href="#/projects/add">Projects</a></li>
                 </ul>
-                <ul ng-if="hasLoggedUser()" class="nav navbar-nav navbar-right">
+                <ul ng-if="isLoggedIn()" class="nav navbar-nav navbar-right">
                     <li ng-click="logout()"><a href="#/logout">Logout</a></li>
                 </ul>
             </div>
         </div>
     </div>
+
     <div class="container">
         <div ng-view />
     </div>
@@ -52,8 +52,15 @@
 
     <script src="home/homeController.js"></script>
 
+    <script src="users/userService.js"></script>
+    <script src="users/userController.js"></script>
+
     <script src="user_account/identity.js"></script>
     <script src="user_account/authentication.js"></script>
+
+    <script src="project/projectService.js"></script>
+    <script src="project/projectController.js"></script>
+
 
 </body>
 </html>

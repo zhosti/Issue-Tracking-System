@@ -17,12 +17,12 @@ angular.module('issueTrackingSystem.user_account.identity', [])
                 return deferred.promise;
             }
 
-            function hasLoggedUser() {
+            function isLoggedIn() {
                 return sessionStorage.authToken !== undefined;
             }
 
             return {
-                hasLoggedUser: hasLoggedUser,
+                isLoggedIn: isLoggedIn,
                 getCurrentUser: getCurrentUser
             };
         }]);
