@@ -1,0 +1,31 @@
+<div id="edit-project" class="main-element">
+    <div class="page-header">
+        <h2>Edit project</h2>
+    </div>
+    <form class="col-md-8" name="editProjectForm">
+        <div class="form-group">
+            <label for="project-name">Name</label>
+            <input type="text" class="form-control" id="project-name" ng-model="project.Name" value="Ivan" />
+        </div>
+        <div class="form-group">
+            <label for="project-leader">Leader</label>
+            <select class="form-control" id="project-leader" ng-model="project.Lead.Id">
+                <option value="{{project.Lead.Id}}">{{project.Lead.Username}}</option>
+                <option ng-repeat="user in users|orderBy:'Username'" value="{{user.Id}}">{{user.Username}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="project-priorities">Priorities (comma separated)</label>
+            <input type="text" class="form-control" id="project-priorities" ng-model="newPriorities" />
+        </div>
+        <div class="form-group">
+            <label for="project-labels">Labels (comma separated)</label>
+            <input type="text" class="form-control" id="project-labels" ng-model="newLabels" />
+        </div>
+        <div class="form-group">
+            <label for="project-description">Description</label>
+            <textarea class="form-control" id="project-description" ng-model="project.Description"  required></textarea>
+        </div>
+        <button class="btn btn-primary" ng-disabled="editProjectForm.$invalid" ng-click="editProject()">Edit</button>
+    </form>
+</div>

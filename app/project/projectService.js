@@ -78,10 +78,48 @@ angular.module('issueTrackingSystem.project.projectService',[
             return deferred.promise;
         }
 
+        function editProject(project){
+            var deferred = $q.defer();
+
+            var projectLabels = '';
+            project.Labels.forEach(function(label, index) {
+                projectLabels += '&labels[' + index + '].Name=' + label.trim();
+            });
+            var projectPriorities='';
+            project.Priorities.forEach(function(priority, index) {
+                projectPriorities += '&priorities[' + index + '].Name=' + priority.trim();
+            });
+            var data = 'Name=' + project.Name +
+                '&Description=' + project.Description +
+                projectLabels + projectPriorities +
+                '&LeadId=' + project.LeadId;
+
+            var requestData = {
+                method: 'PUT',
+                url: BASE_URL + 'projects/' + project.Id,
+                headers: {
+                    Authorization: 'Bearer ' + sessionStorage.authToken,
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                data: data
+            };
+
+            $http(requestData)
+                .then(
+                    function success(data){
+                        deferred.resolve(data);
+                    }, function error(err) {
+                        deferred.reject(err);
+                    });
+
+            return deferred.promise;
+        }
+
         return {
             addProject: addProject,
             getAllProjects: getAllProjects,
-            getProjectById: getProjectById
+            getProjectById: getProjectById,
+            editProject: editProject
         }
     }
 ]);
