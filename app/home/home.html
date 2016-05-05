@@ -32,6 +32,21 @@
         <a href="#/projects/add"><button type="button" class="btn  btn-primary">Add new project</button></a>
         <a href="#/projects/all"><button type="button" class="btn  btn-primary">View all projects</button></a>
     </div>
+
+    <div class="col-md-10">
+        <table class="table">
+            <th>
+                Project lead by <a href="#">{{username}}</a>
+            </th>
+            <tr ng-repeat="project in leadProjects">
+                <td><a href="#projects/{{project.Id}}">{{project.Name}}</a></td>
+            </tr>
+        </table>
+        <pagination  ng-if="projectsPagination" total-items="projectsCount" ng-model="projectsParams.pageNumber"
+                     items-per-page="projectsParams.pageSize" ng-change="getLeadProjects()"
+                     max-size="9" boundary-links="true" class="aligner">
+        </pagination>
+    </div>
     <div class="col-md-10">
         <table class="table">
             <thead>

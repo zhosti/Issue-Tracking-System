@@ -19,7 +19,6 @@ angular.module('issueTrackingSystem.users.userService', [])
 
                 return deferred.promise;
             }
-
             function getUserIssues(pageParams){
                 var deferred = $q.defer();
 
@@ -39,9 +38,30 @@ angular.module('issueTrackingSystem.users.userService', [])
                 return deferred.promise;
             }
 
+            function getUserLeadProjects(pageParams){
+                var deferred = $q.defer();
+
+                var id = JSON.parse(sessionStorage['currentUser']).Id;
+                var url = BASE_URL + 'projects?filter=Lead.Id="' + id + '"&pageSize=' +
+                    pageParams.pageSize +
+                    '&pageNumber=' +
+                    pageParams.pageNumber;
+
+                $http.defaults.headers.common.Authorization = 'Bearer ' + sessionStorage.authToken;
+                $http.get(url)
+                    .then(function(response){
+                        deferred.resolve(response.data);
+                    }, function(err){
+                        deferred.reject(err);
+                    });
+
+                return deferred.promise;
+            }
+
             return {
                 getAllUsers: getAllUsers,
-                getUserIssues: getUserIssues
+                getUserIssues: getUserIssues,
+                getUserLeadProjects: getUserLeadProjects
             }
         }
     ]);

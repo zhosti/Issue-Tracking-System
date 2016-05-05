@@ -13,6 +13,11 @@ angular.module('issueTrackingSystem.users.userController', [])
                 pageNumber: 1
             };
 
+            $scope.projectsParams = {
+                pageSize: 9,
+                pageNumber: 1
+            };
+
             $scope.allUsers = function() {
                 userService.getAllUsers()
                     .then(
@@ -36,8 +41,21 @@ angular.module('issueTrackingSystem.users.userController', [])
                     })
             };
 
+            $scope.getLeadProjects  = function(){
+                userService.getUserLeadProjects($scope.projectsParams)
+                    .then(function success(data){
+                        $scope.leadProjects = data.Projects;
+                        $scope.projectsPagination  = data.TotalPages > 1;
+                        $scope.projectsCount  = data.TotalPages * $scope.projectsParams.pageSize;
+                    }, function error(err){
+                        console.log(err);
+                    })
+            };
+
             if ($scope.isLoggedIn()){
+                $scope.username = JSON.parse(sessionStorage['currentUser']).Username;
                 $scope.getUserIssues();
+                $scope.getLeadProjects();
             }
 
         }]);
