@@ -2,13 +2,21 @@ angular.module('issueTrackingSystem.issues.issueController', [
         'issueTrackingSystem.issues.issueService'
     ])
     .config(['$routeProvider', function($routeProvider){
-        $routeProvider.when('/projects/addIssue/:id', {
-            controller: 'IssueController',
-            templateUrl: 'issues/add-issue.html',
-            access: {
-                requiresLoggedUser: true
-            }
-        })
+        $routeProvider
+            .when('/projects/addIssue/:id', {
+                controller: 'IssueController',
+                templateUrl: 'issues/add-issue.html',
+                access: {
+                    requiresLoggedUser: true
+                }
+            })
+            .when('/issues/:id', {
+                controller: 'IssueController',
+                templateUrl: 'issues/view-issue.html',
+                access: {
+                    requiresLoggedUser: true
+                }
+            })
     }])
     .controller('IssueController', [
         '$scope',
@@ -16,7 +24,8 @@ angular.module('issueTrackingSystem.issues.issueController', [
         '$location',
         'issueService',
         'projectService',
-        function($scope, $routeParams, $location, issueService, projectService){
+        'identity',
+        function($scope, $routeParams, $location, issueService, projectService, identity){
             $scope.allUsers();
 
             projectService.getProjectById($routeParams.id)
@@ -48,6 +57,6 @@ angular.module('issueTrackingSystem.issues.issueController', [
                             console.log(err);
                         }
                     )
-            }
+            };
         }
     ]);

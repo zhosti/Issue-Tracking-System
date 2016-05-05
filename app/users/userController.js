@@ -5,7 +5,6 @@ angular.module('issueTrackingSystem.users.userController', [])
         '$scope',
         'userService',
         function UserController($scope, userService) {
-
             $scope.allUsers = function() {
                 userService.getAllUsers()
                     .then(

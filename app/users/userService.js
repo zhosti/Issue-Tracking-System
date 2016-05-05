@@ -19,7 +19,6 @@ angular.module('issueTrackingSystem.users.userService', [])
 
                 return deferred.promise;
             }
-
             return {
                 getAllUsers: getAllUsers
             }
