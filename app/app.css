@@ -32,7 +32,7 @@
 #login-register-form, #edit-project{
   margin-top: 10em;
 }
-.project-form{
+.project-form, #home-page{
   margin-top: 5em;
 }
 

@@ -9,14 +9,14 @@ angular.module('issueTrackingSystem.issues.issueController', [
                 access: {
                     requiresLoggedUser: true
                 }
-            })
-            .when('/issues/:id', {
-                controller: 'IssueController',
-                templateUrl: 'issues/view-issue.html',
-                access: {
-                    requiresLoggedUser: true
-                }
-            })
+            });
+            //.when('/issues/:id', {
+            //    controller: 'IssueController',
+            //    templateUrl: 'issues/view-issue.html',
+            //    access: {
+            //        requiresLoggedUser: true
+            //    }
+            //})
     }])
     .controller('IssueController', [
         '$scope',
