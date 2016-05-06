@@ -135,6 +135,20 @@ angular.module('issueTrackingSystem.issues.issueController', [
                         }
                     )
             };
+
+            function getComments (){
+                issueService.getIssueComments($routeParams.id)
+                    .then(
+                        function success(comments){
+                            $scope.comments = comments.data;
+                        },
+                        function error (err){
+                            console.log(err);
+                        }
+                    )
+            }
+
             getIssue();
+            getComments();
         }
     ]);

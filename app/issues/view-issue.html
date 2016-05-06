@@ -35,4 +35,17 @@
             </tbody>
         </table>
     </div>
+    <div id="comments-container" class="col-md-12">
+        <h2>Comments:</h2>
+            <div id="prev-comments" ng-repeat="comment in comments">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <div id="author-info"><strong>{{comment.Author.Username}}</strong> - <span class="text-muted>">{{comment.CreatedOn|date}}</span></div>
+                    </div>
+                    <div class="panel-body" id="comment">
+                        {{comment.Text}}
+                    </div>
+                </div>
+            </div>
+    </div>
 </div>

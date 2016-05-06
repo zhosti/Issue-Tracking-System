@@ -92,10 +92,29 @@ angular.module('issueTrackingSystem.issues.issueService', [])
 
                 return deferred.promise;
             }
+
+            function getIssueComments(issueId){
+                var deferred = $q.defer();
+
+                $http.defaults.headers.common.Authorization = 'Bearer ' + sessionStorage.authToken;
+                $http.get(BASE_URL + 'Issues/' + issueId + '/comments')
+                    .then(
+                        function success(data) {
+                            deferred.resolve(data);
+                        },
+                        function error(err) {
+                            deferred.reject(err);
+                        }
+                    );
+
+                return deferred.promise;
+            }
+
             return {
                 addIssue: addIssue,
                 getIssueById: getIssueById,
-                editIssue: editIssue
+                editIssue: editIssue,
+                getIssueComments: getIssueComments
             }
         }
     ]);
