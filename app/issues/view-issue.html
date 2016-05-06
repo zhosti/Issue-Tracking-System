@@ -1,10 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-
-</body>
-</html>
+<div class="jumbotron container">
+    <div class="col-md-5">
+        <h2>Issue page</h2>
+    </div>
+    <div class="col-md-8">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Issue key</th>
+                <th>Title</th>
+                <th>Description</th>
+                <th>Assignee</th>
+                <th>Priority</th>
+                <th>Due Date</th>
+                <th>Author</th>
+                <th>Project</th>
+                <th>Status</th>
+                <th>Labels</th>
+            </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>{{currentIssue.IssueKey}}</td>
+                    <td>{{currentIssue.Title}}</td>
+                    <td>{{currentIssue.Description}}</td>
+                    <td>{{currentIssue.Assignee.Username}}</td>
+                    <td>{{currentIssue.Priority.Name}}</td>
+                    <td>{{currentIssue.DueDate|date}}</td>
+                    <td>{{currentIssue.Author.Username}}</td>
+                    <td>{{currentIssue.Project.Name}}</td>
+                    <td>{{currentIssue.Status.Name}}</td>
+                    <td>{{currentIssueLabels.join(', ')}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

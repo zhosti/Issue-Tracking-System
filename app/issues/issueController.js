@@ -9,14 +9,14 @@ angular.module('issueTrackingSystem.issues.issueController', [
                 access: {
                     requiresLoggedUser: true
                 }
-            });
-            //.when('/issues/:id', {
-            //    controller: 'IssueController',
-            //    templateUrl: 'issues/view-issue.html',
-            //    access: {
-            //        requiresLoggedUser: true
-            //    }
-            //})
+            })
+            .when('/issues/:id', {
+                controller: 'IssueController',
+                templateUrl: 'issues/view-issue.html',
+                access: {
+                    requiresLoggedUser: true
+                }
+            })
     }])
     .controller('IssueController', [
         '$scope',
@@ -58,5 +58,29 @@ angular.module('issueTrackingSystem.issues.issueController', [
                         }
                     )
             };
+
+            function getIssue() {
+                issueService.getIssueById($routeParams.id)
+                    .then(
+                        function success(issue) {
+                            $scope.currentIssue = issue.data;
+                            $scope.isAssignee = $scope.currentIssue.Assignee.Id === JSON.parse(sessionStorage.currentUser).Id;
+                            $scope.currentIssueLabels = [];
+                            issue.data.Labels.forEach(function (label) {
+                                $scope.currentIssueLabels.push(label.Name);
+                            });
+                            identity.setProjectLeader($scope.currentIssue.Project.Id)
+                                .then(
+                                    function success() {
+                                        $scope.isProjectLeader = identity.isProjectLeader();
+                                    }
+                                );
+                        },
+                        function error(err) {
+                            console.log(err);
+                        }
+                    );
+            }
+            getIssue();
         }
     ]);

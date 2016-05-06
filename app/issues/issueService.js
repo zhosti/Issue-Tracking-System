@@ -40,9 +40,25 @@ angular.module('issueTrackingSystem.issues.issueService', [])
 
                 return deferred.promise;
             }
+            function getIssueById(issueId) {
+                var deferred = $q.defer();
 
+                $http.defaults.headers.common.Authorization = 'Bearer ' + sessionStorage.authToken;
+                $http.get(BASE_URL + 'Issues/' + issueId)
+                    .then(
+                        function success(data) {
+                            deferred.resolve(data);
+                        },
+                        function error(err) {
+                            deferred.reject(err);
+                        }
+                    );
+
+                return deferred.promise;
+            }
             return {
-                addIssue: addIssue
+                addIssue: addIssue,
+                getIssueById: getIssueById
             }
         }
     ]);
