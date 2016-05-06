@@ -47,5 +47,12 @@
                     </div>
                 </div>
             </div>
+        <div ng-if="isProjectLeader||isAssignee" class="form-group" id="add-comment-field">
+            <form action="" name="commentForm">
+                <label for="comment-field">Issue Comment:</label>
+                <textarea ng-model="commentIssue.text" class="form-control" id="comment-field" minlength="2" placeholder="Leave your comment here" required></textarea>
+                <button ng-disabled="commentForm.$invalid" class="btn btn-success" ng-click="addComment(commentIssue.text)">Comment</button>
+            </form>
+        </div>
     </div>
 </div>

@@ -14,7 +14,7 @@ angular.module('issueTrackingSystem.users.userController', [])
             };
 
             $scope.projectsParams = {
-                pageSize: 9,
+                pageSize: 10,
                 pageNumber: 1
             };
 

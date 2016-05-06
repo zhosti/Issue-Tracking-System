@@ -148,6 +148,19 @@ angular.module('issueTrackingSystem.issues.issueController', [
                     )
             }
 
+            $scope.addComment = function (comment){
+                issueService.addIssueComment(comment, $routeParams.id)
+                    .then(
+                        function success(data){
+                            $scope.commentIssue = {};
+                            $scope.comments = data.data;
+                        },
+                        function error(err){
+                            console.log(err);
+                        }
+                    )
+            };
+
             getIssue();
             getComments();
         }
