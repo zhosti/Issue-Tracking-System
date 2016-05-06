@@ -147,7 +147,7 @@ tbody:hover tr:hover td {
   margin-left: 5em;
   width: 7em;
 }
-#edit-btn, #add-issue-btn{
+#edit-btn, #add-issue-btn, #edit-issue-button{
   margin-top: 2em;
   width: 7em;
 }

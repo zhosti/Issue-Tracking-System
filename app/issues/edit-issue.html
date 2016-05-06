@@ -1,0 +1,38 @@
+<div class="main-element">
+    <div class="page-header">
+        <h2>Edit issue</h2>
+    </div>
+    <form name="editIssueForm" class="col-md-6">
+        <div class="form-group">
+            <label for="issue-title">Title</label>
+            <input type="text" id="issue-title" class="form-control" ng-model="currentIssue.Title" />
+        </div>
+        <div class="form-group">
+            <label for="issue-description">Description</label>
+        <textarea class="form-control" id="issue-description" ng-model="currentIssue.Description"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="issue-dueDate">Due date</label>
+            <input type="datetime-local" id="issue-dueDate" class="form-control" ng-model="currentIssueDueDate" />
+        </div>
+        <div class="form-group">
+            <label for="issue-assignee">Assignee</label>
+            <select class="form-control" id="issue-assignee" ng-model="currentIssue.Assignee.Id">
+                <option value="{{currentIssue.Assignee.Id}}">{{currentIssue.Assignee.Username}}</option>
+                <option ng-repeat="user in users|orderBy:'Username'" value="{{user.Id}}">{{user.Username}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="priorities">Priority</label>
+            <select class="form-control" id="priorities" ng-model="issuePriority">
+                <option value="">Change priority</option>
+                <option ng-repeat="pr in projectPriorities" value="{{pr.Id}}">{{pr.Name}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="issue-labels">Labels</label>
+            <input type="text" id="issue-labels" class="form-control" ng-model="currentIssueLabels" />
+        </div>
+        <button class="btn btn-success" ng-click="editIssue()">Edit issue</button>
+    </form>
+</div>

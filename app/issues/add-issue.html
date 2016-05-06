@@ -25,10 +25,11 @@
         <div class="form-group">
             <label for="priorities">Priority</label>
             <select class="form-control" id="priorities" ng-model="addIssue.PriorityId" required>
-                <option value="">Choose priority</option>
-                <option ng-repeat="pr in projectPriorities" value="{{pr.Id}}">{{pr.Name}}</option>
+                <option value="">Change priority</option>
+                <option ng-repeat="p in priorities" value="{{p.Id}}">{{p.Name}}</option>
             </select>
         </div>
+
         <div class="form-group">
             <label for="issue-labels">Labels</label>
             <input type="text" id="issue-labels" class="form-control" ng-model="addIssue.Labels" required />
