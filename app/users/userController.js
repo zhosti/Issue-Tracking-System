@@ -5,8 +5,11 @@ angular.module('issueTrackingSystem.users.userController', [])
         '$scope',
         'userService',
         'identity',
-        function UserController($scope, userService,identity) {
+        'authentication',
+        function UserController($scope, userService,identity, authentication) {
             $scope.isLoggedIn = identity.isLoggedIn;
+
+            $scope.isAdmin = identity.isAdmin;
 
             $scope.issuesParams = {
                 pageSize: 10,
@@ -50,6 +53,17 @@ angular.module('issueTrackingSystem.users.userController', [])
                     }, function error(err){
                         console.log(err);
                     })
+            };
+
+            $scope.logout = function(){
+                authentication.logout()
+                    .then(
+                        function success(){
+                            sessionStorage.clear();
+                        },
+                        function(err){
+                            console.log(err);
+                        });
             };
 
             if ($scope.isLoggedIn()){

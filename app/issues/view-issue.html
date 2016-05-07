@@ -3,7 +3,7 @@
         <h2>Issue page</h2>
     </div>
     <div class="col-md-8">
-        <a id="edit-issue-button" href="#issues/edit/{{currentIssue.Id}}" class="btn btn-warning" role="button">Edit</a>
+        <a ng-if="isAdmin()||isProjectLeader" id="edit-issue-button" href="#issues/edit/{{currentIssue.Id}}" class="btn btn-warning" role="button">Edit</a>
         <table class="table table-hover">
             <thead>
             <tr>

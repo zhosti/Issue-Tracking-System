@@ -33,7 +33,7 @@ angular.module('issueTrackingSystem.user_account.identity', [])
                 $http.defaults.headers.common.Authorization = 'Bearer ' + sessionStorage.authToken;
                 $http.get(BASE_URL + 'projects/' + projectId)
                     .then(function (data) {
-                        projectLeader = data.data.Lead.Id===JSON.parse(sessionStorage.currentUser).Id;
+                        projectLeader = data.data.Lead.Id === JSON.parse(sessionStorage.currentUser).Id;
                         deferred.resolve();
                     }, function (err) {
                         deferred.reject(err)
@@ -42,10 +42,18 @@ angular.module('issueTrackingSystem.user_account.identity', [])
 
             }
 
+            function isAdmin(){
+                if(sessionStorage['currentUser']){
+                    var current = JSON.parse(sessionStorage.currentUser);
+                    return current.isAdmin;
+                }
+            }
+
             return {
                 isLoggedIn: isLoggedIn,
                 getCurrentUser: getCurrentUser,
                 isProjectLeader: isProjectLeader,
-                setProjectLeader: setProjectLeader
+                setProjectLeader: setProjectLeader,
+                isAdmin: isAdmin
             };
         }]);

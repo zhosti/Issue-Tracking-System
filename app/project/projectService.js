@@ -7,6 +7,7 @@ angular.module('issueTrackingSystem.project.projectService',[
     '$q',
     'BASE_URL',
     function($http, $q, BASE_URL){
+
         function addProject(project){
             var deferred = $q.defer();
 
