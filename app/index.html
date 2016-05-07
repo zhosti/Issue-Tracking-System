@@ -30,6 +30,7 @@
                 <ul ng-if="isLoggedIn()" class="nav navbar-nav">
                     <li><a href="#/dashboard">Dashboard</a></li>
                     <li><a href="#/projects/all">Projects</a></li>
+                    <li><a ng-if="isAdmin()" href="#/users/all">All Users</a></li>
                 </ul>
                 <ul ng-if="isLoggedIn()" class="nav navbar-nav navbar-right">
                     <li ng-click="logout()"><a href="#/logout">Logout</a></li>
@@ -65,5 +66,8 @@
 
     <script src="issues/issueService.js"></script>
     <script src="issues/issueController.js"></script>
+
+    <script src="admin/adminService.js"></script>
+    <script src="admin/adminController.js"></script>
 </body>
 </html>

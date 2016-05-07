@@ -16,7 +16,7 @@ angular.module('issueTrackingSystem.home',[])
         function HomeController($scope, $location, userService, authentication, identity){
             $scope.register = function(user){
                 authentication.registerUser(user)
-                    .then(function(regUser){
+                    .then(function(){
                         $scope.login({username: user.email, password: user.password});
                     },
                     function(err){

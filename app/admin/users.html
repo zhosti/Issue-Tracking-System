@@ -1,0 +1,30 @@
+<div class="jumbotron container" ng-if="isAdmin()">
+    <div class="col-md-5">
+        <h2>Users</h2>
+    </div>
+    <div class="col-md-8">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th>Username</th>
+                <th>Is Admin</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr ng-repeat="user in users">
+                <td>{{user.Username}}</td>
+                <td>{{user.isAdmin}}</td>
+                <td>
+                    <div ng-if="!user.isAdmin">
+                        <button class="btn btn-info" ng-click="makeAdmin(user.Id)">Make admin</button>
+                    </div>
+                    <div ng-if="user.isAdmin">
+                        Admin
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
