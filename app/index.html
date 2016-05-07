@@ -29,6 +29,7 @@
             <div class="navbar-collapse collapse" id="navbar-main">
                 <ul ng-if="isLoggedIn()" class="nav navbar-nav">
                     <li><a href="#/dashboard">Dashboard</a></li>
+                    <li><a href="#/profile/password">Profile</a></li>
                     <li><a href="#/projects/all">Projects</a></li>
                     <li><a ng-if="isAdmin()" href="#/users/all">All Users</a></li>
                 </ul>
@@ -69,5 +70,8 @@
 
     <script src="admin/adminService.js"></script>
     <script src="admin/adminController.js"></script>
+
+    <script src="user_account/accountService.js"></script>
+    <script src="user_account/accountController.js"></script>
 </body>
 </html>

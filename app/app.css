@@ -29,7 +29,7 @@
   padding: 0;
 }
 
-#login-register-form, #edit-project{
+#login-register-form, #edit-project, #change-password-form{
   margin-top: 10em;
 }
 .project-form, #home-page{
@@ -151,7 +151,6 @@ tbody:hover tr:hover td {
   margin-top: 2em;
   width: 7em;
 }
-
 
 .panel {
   position:relative;
