@@ -36,7 +36,8 @@ angular.module('issueTrackingSystem.project.projectController',[
     '$location',
     '$routeParams',
     'projectService',
-    function ProjectController($scope, $location, $routeParams, projectService) {
+    'messageService',
+    function ProjectController($scope, $location, $routeParams, projectService, messageService) {
         $scope.projectsPagination = {
             pageSize: 10,
             currentPage: 1
@@ -52,9 +53,10 @@ angular.module('issueTrackingSystem.project.projectController',[
             projectService.addProject(project)
                 .then(
                     function success(data){
-                        console.log(data);
-                    }, function error(err) {
-                        console.log(err);
+                        messageService.showSuccess('Project is added');
+                        $location.path('projects/' + data.data.Id);
+                    }, function error() {
+                        messageService.showError('There is an error, can\'t add the project');
                     }
                 )
         };
@@ -66,8 +68,8 @@ angular.module('issueTrackingSystem.project.projectController',[
                         $scope.allProjects = data.Projects;
                         $scope.projectsCount  = data.TotalPages * $scope.projectsPagination.pageSize;
 
-                    }, function error(err) {
-                        console.log(err);
+                    }, function error() {
+                        messageService.showError('There is a problem with load all projects');
                     });
         };
 
@@ -76,8 +78,8 @@ angular.module('issueTrackingSystem.project.projectController',[
                 .then(
                     function success(data) {
                         $scope.project = data.data;
-                    }, function error(err) {
-                        console.log(err);
+                    }, function error() {
+                       // messageService.showError('Problem with loading a project');
                     });
         };
 
@@ -103,8 +105,9 @@ angular.module('issueTrackingSystem.project.projectController',[
                 .then(
                     function success() {
                         $location.path('projects/' + $scope.project.Id);
+                        messageService.showSuccess('Project is edited');
                     }, function error(err) {
-                        console.log(err);
+                        messageService.showError('There is problem with editing a project');
                     });
         };
 
@@ -120,8 +123,8 @@ angular.module('issueTrackingSystem.project.projectController',[
                     $scope.project.Priorities.forEach(function(priority) {
                         $scope.newPriorities.push(priority.Name);
                     });
-                }, function error(err){
-                    console.log(err);
+                }, function error(){
+                    //messageService.showError('Problem with loading a project');
                 })
         }
 

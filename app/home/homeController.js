@@ -13,20 +13,23 @@ angular.module('issueTrackingSystem.home',[])
         'userService',
         'authentication',
         'identity',
-        function HomeController($scope, $location, userService, authentication, identity){
+        'messageService',
+        function HomeController($scope, $location, userService, authentication, identity, messageService){
             $scope.register = function(user){
                 authentication.registerUser(user)
                     .then(function(){
                         $scope.login({username: user.email, password: user.password});
-                    },
+                        messageService.showSuccess('User was register successfully')
+                        },
                     function(err){
-                        console.log(err);
+                        messageService.showError('Problem, cannot register user')
                     });
             };
             $scope.login = function(user){
                 authentication.loginUser(user)
                     .then(function(loggedInUser){
                             sessionStorage['authToken'] = loggedInUser.access_token;
+                            messageService.showSuccess('Login successful!');
                             identity.getCurrentUser()
                                 .then(
                                     function(data){
@@ -35,8 +38,8 @@ angular.module('issueTrackingSystem.home',[])
                                         console.log(err);
                                     });
                         },
-                        function(err){
-                            console.log(err);
+                        function(){
+                            messageService.showError('Login failed!');
                         });
 
             };

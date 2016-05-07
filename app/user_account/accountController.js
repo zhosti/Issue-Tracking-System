@@ -11,15 +11,17 @@ angular.module('issueTrackingSystem.user_account.accountController', [])
         '$scope',
         'accountService',
         '$location',
-        function AccountController($scope, accountService, $location){
+        'messageService',
+        function AccountController($scope, accountService, $location, messageService){
             $scope.changeUserPassword = function (data){
                 accountService.changePassword(data)
                     .then(
                         function success(){
                             $location.path('#/');
+                            messageService.showSuccess('Successfully changed password.');
                         },
                         function error(err){
-                            console.log(err);
+                            messageService.showError('Error.', err);
                         }
                     )
             };

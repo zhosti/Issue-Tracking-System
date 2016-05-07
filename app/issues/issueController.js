@@ -32,7 +32,8 @@ angular.module('issueTrackingSystem.issues.issueController', [
         'issueService',
         'projectService',
         'identity',
-        function($scope, $routeParams, $location, issueService, projectService, identity){
+        'messageService',
+        function($scope, $routeParams, $location, issueService, projectService, identity, messageService){
             $scope.allUsers();
 
             projectService.getProjectById($routeParams.id)
@@ -41,7 +42,7 @@ angular.module('issueTrackingSystem.issues.issueController', [
                         $scope.priorities = project.data.Priorities;
                     },
                     function err(err){
-                        console.log(err);
+                        messageService.showError('Problem with loading the project', err);
                     }
                 );
 
@@ -59,9 +60,10 @@ angular.module('issueTrackingSystem.issues.issueController', [
                     .then(
                         function success(){
                             $location.path('projects/' + $routeParams.id );
+                            messageService.showError('Issues is added');
                         },
-                        function error(err){
-                            console.log(err);
+                        function error(){
+                            messageService.showError('The is a problem with adding an issue');
                         }
                     )
             };
@@ -83,8 +85,8 @@ angular.module('issueTrackingSystem.issues.issueController', [
                                     }
                                 );
                         },
-                        function error(err) {
-                            console.log(err);
+                        function error() {
+                            messageService.showError('There is a problem with loading an issue')
                         }
                     );
             }
@@ -106,8 +108,8 @@ angular.module('issueTrackingSystem.issues.issueController', [
                                 $scope.projectPriorities = project.data.Priorities;
                             });
                     },
-                    function error(err){
-                        console.log(err);
+                    function error(){
+                        messageService.showError('There is a problem with loading an issue')
                     }
                 );
 
@@ -129,9 +131,10 @@ angular.module('issueTrackingSystem.issues.issueController', [
                     .then(
                         function success(data){
                             $location.path('issues/' + data.data.Id);
+                            messageService.showSuccess('Issue is edited')
                         },
                         function error(err){
-                            console.log(err);
+                            messageService.showError('There is a problem with editing an issue')
                         }
                     )
             };
@@ -142,8 +145,8 @@ angular.module('issueTrackingSystem.issues.issueController', [
                         function success(comments){
                             $scope.comments = comments.data;
                         },
-                        function error (err){
-                            console.log(err);
+                        function error (){
+                            messageService.showError('There is a problem with loading a comments')
                         }
                     )
             }
@@ -154,9 +157,10 @@ angular.module('issueTrackingSystem.issues.issueController', [
                         function success(data){
                             $scope.commentIssue = {};
                             $scope.comments = data.data;
+                            messageService.showSuccess('Comment is added')
                         },
-                        function error(err){
-                            console.log(err);
+                        function error(){
+                            messageService.showError('There is a problem with adding a comment');
                         }
                     )
             };

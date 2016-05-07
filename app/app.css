@@ -35,7 +35,9 @@
 .project-form, #home-page{
   margin-top: 5em;
 }
-
+.home{
+  text-align: center;
+}
 strong {
   font-weight: bold;
 }

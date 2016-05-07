@@ -6,7 +6,8 @@ angular.module('issueTrackingSystem.users.userController', [])
         'userService',
         'identity',
         'authentication',
-        function UserController($scope, userService,identity, authentication) {
+        'messageService',
+        function UserController($scope, userService,identity, authentication, messageService) {
             $scope.isLoggedIn = identity.isLoggedIn;
 
             $scope.isAdmin = identity.isAdmin;
@@ -60,16 +61,17 @@ angular.module('issueTrackingSystem.users.userController', [])
                     .then(
                         function success(){
                             sessionStorage.clear();
+                            messageService.showSuccess('Logout successfully');
                         },
                         function(err){
-                            console.log(err);
+                            messageService.showError('Logout failed');
                         });
             };
 
             if ($scope.isLoggedIn()){
-                $scope.username = JSON.parse(sessionStorage['currentUser']).Username;
                 $scope.getUserIssues();
                 $scope.getLeadProjects();
+                $scope.username = JSON.parse(sessionStorage['currentUser']).Username;
             }
 
         }]);

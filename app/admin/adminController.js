@@ -13,14 +13,16 @@ angular.module('issueTrackingSystem.admin.adminController', [
     .controller('AdminController', [
         '$scope',
         'adminService',
-        function AdminController($scope, adminService){
+        'messageService',
+        function AdminController($scope, adminService, messageService){
             $scope.allUsers();
 
             $scope.makeAdmin = function(userId){
                 adminService.makeAdmin(userId)
                     .then(
-                        function success(data){
+                        function success(){
                             $scope.allUsers();
+                            messageService.showSuccess('User is changed to admin');
                         });
             };
         }]);
