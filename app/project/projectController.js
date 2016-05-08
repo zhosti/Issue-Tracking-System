@@ -128,8 +128,8 @@ angular.module('issueTrackingSystem.project.projectController',[
                 })
         }
 
+        getEditProjectById($routeParams.id);
         $scope.getAllProjects();
         $scope.getProjectById($routeParams.id);
-        getEditProjectById($routeParams.id);
     }
 ]);

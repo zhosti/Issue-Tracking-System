@@ -42,7 +42,7 @@ angular.module('issueTrackingSystem.issues.issueController', [
                         $scope.priorities = project.data.Priorities;
                     },
                     function err(err){
-                        messageService.showError('Problem with loading the project', err);
+                        //messageService.showError('Problem with loading the project', err);
                     }
                 );
 
@@ -60,7 +60,7 @@ angular.module('issueTrackingSystem.issues.issueController', [
                     .then(
                         function success(){
                             $location.path('projects/' + $routeParams.id );
-                            messageService.showError('Issues is added');
+                            messageService.showSuccess('Issues is added');
                         },
                         function error(){
                             messageService.showError('The is a problem with adding an issue');
